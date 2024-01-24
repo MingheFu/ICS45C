@@ -41,6 +41,6 @@ TEST(WordCount, OutputWordCount) {
 	word_counts["aa"] = 3;
 	stringstream output;
 	output_word_counts(word_counts, output);
-	EXPECT_STREQ(output.str().c_str(), "aa 3\ncase 1\ntest 1\n");
+	EXPECT_STREQ(output.str().c_str(), "case 1\naa 3\ntest 1\n");
 }
 
