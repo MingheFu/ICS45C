@@ -7,9 +7,9 @@
 using namespace std;
 
 TEST(WordCount, ToLowercase) {
-	string uppercase = "MiXed CAse StrING";
+	string uppercase = "Café";
 	to_lowercase(uppercase);
-	EXPECT_STREQ("mixed case string", uppercase.c_str());
+	EXPECT_STREQ("café", uppercase.c_str());
 
 }
 
