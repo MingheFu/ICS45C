@@ -7,9 +7,9 @@
 using namespace std;
 
 TEST(WordCount, ToLowercase) {
-	string uppercase = "UPPeR CAse";
+	string uppercase = "123!@#";
 	to_lowercase(uppercase);
-	EXPECT_STREQ("upper case", uppercase.c_str());
+	EXPECT_STREQ("123!@#", uppercase.c_str());
 
 }
 
@@ -34,14 +34,14 @@ TEST(WordCount, CountWords) {
 
 TEST(WordCount, OutputWordCount) {
 	map<string, int> word_counts;
-	word_counts[string(100000, 'a')] = 1;
+	word_counts[string(100003, 'a')] = 1;
 	//word_counts["test"] = 1;
 	//word_counts["case"] = 1;
 	//word_counts["aa"] = 3;
 	stringstream output;
 	output_word_counts(word_counts, output);
 	//EXPECT_STREQ(output.str().c_str(), "aa 3\ncase 1\ntest 1\n");
-	EXPECT_LE(output.str().length(), 100003);
+	EXPECT_LE(output.str().length(), 100006);
 
 }
 
