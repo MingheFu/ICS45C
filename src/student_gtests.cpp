@@ -45,4 +45,53 @@ TEST(WordCount, OutputWordCount) {
 
 }
 
+TEST(WordCount, ToLowercaseMixedCase) {
+	string test = "HeLLO WorlD";
+	to_lowercase(test);
+	EXPECT_EQ("hello world", test);
+}
+
+TEST(WordCont, ToLowerCaseAllUpper) {
+	string test = "TEST";
+	to_lowercase(test);
+	EXPECT_EQ("test", test);
+}
+
+TEST(WordCount, LoadStopWordsEmptyStream) {
+	stringstream test("");
+	const auto stop_words = load_stopwords(test);
+	EXPECT_TRUE(stop_words.empty());
+}
+
+TEST(WordCount, CountWordsEmpty) {
+	stringstream test("");
+	const auto counts = count_words(test, {});
+	EXPECT_TRUE(counts.empty());
+}
+
+TEST(WordCount, CountWordsWithStopWords) {
+	stringstream test("count with stop words");
+	stringstream stopwords("count with");
+	const auto stop_words = load_stopwords(stopwords);
+	const auto counts = count_words(test, stop_words);
+	EXPECT_EQ(counts.at("stop"), 1);
+	EXPECT_EQ(counts.at("words"), 1);
+	EXPECT_FALSE(counts.count("count"));
+	EXPECT_FALSE(counts.count("with"));
+}
+
+TEST (WordCount, OutputWordCountsEmpty) {
+	map<string, int> word_counts;
+	stringstream output;
+	output_word_counts(word_counts,output);
+	EXPECT_TRUE(output.str().empty());
+}
+
+TEST (WordCount, LoadStopWordsRepetive) {
+	stringstream test("hi hi hello");
+	const auto stop_words = load_stopwords(test);
+	EXPECT_EQ(stop_words.size(), 2);
+	EXPECT_TRUE(stop_words.contains("hi"));
+}
+
 
