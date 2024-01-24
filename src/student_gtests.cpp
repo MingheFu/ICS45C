@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+
 #include <sstream>
 #include "word_count.hpp"
 
@@ -26,9 +27,9 @@ TEST(WordCount, LoadStopwords) {
 
 
 TEST(WordCount, CountWords) {
-	stringstream test("123 456 789");
+	stringstream test("Word word Word WoRd");
 	const auto counts = count_words(test, {});
-	EXPECT_FALSE(counts.empty());
+	EXPECT_EQ(counts.at("word"),4);
 }
 
 TEST(WordCount, OutputWordCount) {
