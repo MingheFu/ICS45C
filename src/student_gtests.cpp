@@ -120,3 +120,19 @@ TEST(WorldCount, outputWordCountsWithIdenticalAppear) {
 	EXPECT_EQ(output.str(), "same 2\ntime 2\n");
 }
 
+TEST(WorldCount, CountWordsEmptyDoc) {
+	stringstream test("");
+	stringstream stopwords("stop words");
+	const auto stop_words = load_stopwords(stopwords);
+	const auto counts = count_words(test, stop_words);
+	EXPECT_TRUE(counts.empty());
+}
+
+TEST(WorldCount, LoadStopWordsMixedCase) {
+	stringstream test("Hello WOrld WORLD");
+	const auto stop_words = load_stopwords(test);
+	EXPECT_EQ(stop_words.size(), 2);
+	EXPECT_TRUE(stop_words.contains("hello"));
+	EXPECT_TRUE(stop_words.contains("world"));
+}
+
