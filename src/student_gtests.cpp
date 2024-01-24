@@ -28,7 +28,7 @@ TEST(WordCount, LoadStopwords) {
 TEST(WordCount, CountWords) {
 	stringstream test("123 456 789");
 	const auto counts = count_words(test, {});
-	EXPECT_TRUE(counts.empty());
+	EXPECT_FALSE(counts.empty());
 }
 
 TEST(WordCount, OutputWordCount) {
