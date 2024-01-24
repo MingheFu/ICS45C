@@ -30,7 +30,7 @@ TEST(WordCount, CountWords) {
 	EXPECT_EQ(counts.at("case"), 1);
 	EXPECT_EQ(counts.at("aa"), 3);
 	EXPECT_EQ(counts.at("and"), 1);
-	EXPECT_FALSE(counts.contains("bb"));
+	EXPECT_EQ(counts.at("bb"), 0);
 
 }
 
@@ -41,6 +41,6 @@ TEST(WordCount, OutputWordCount) {
 	word_counts["aa"] = 3;
 	stringstream output;
 	output_word_counts(word_counts, output);
-	EXPECT_STREQ(output.str().c_str(), "case 1\naa 3\ntest 1\n");
+	EXPECT_STREQ(output.str().c_str(), "aa 3\ncase 1\ntest 1\n");
 }
 

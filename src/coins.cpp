@@ -11,6 +11,10 @@ void Coins::deposit_coins(Coins& coins){
 	dimes += coins.dimes;
 	nickels += coins.nickels;
 	pennies += coins.pennies;
+	coins.quarters = 0;
+	coins.dimes = 0;
+	coins.nickels = 0;
+	coins.pennies = 0;
 }
 
 bool Coins::has_exact_change_for_coins(const Coins& coins) const {
