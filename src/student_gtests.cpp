@@ -92,6 +92,31 @@ TEST (WordCount, LoadStopWordsRepetive) {
 	const auto stop_words = load_stopwords(test);
 	EXPECT_EQ(stop_words.size(), 2);
 	EXPECT_TRUE(stop_words.contains("hi"));
+	EXPECT_TRUE(stop_words.contains("hello"));
 }
 
+TEST(WordCount, CountWordsWithSpecialChars) {
+	stringstream test("123 456 hello");
+	const auto counts = count_words(test, {});
+	EXPECT_EQ(counts.at("123"), 1);
+	EXPECT_EQ(counts.at("456"), 1);
+	EXPECT_EQ(counts.at("hello"), 1);
+}
+
+TEST(WordCount, CountWordsNoWordsValid) {
+	stringstream test("stop word");
+	stringstream stopwords("stop word");
+	const auto stop_words = load_stopwords(stopwords);
+	const auto counts = count_words(test, stop_words);
+	EXPECT_TRUE(counts.empty());
+}
+
+TEST(WorldCount, outputWordCountsWithIdenticalAppear) {
+	map<string, int> word_counts;
+	word_counts["same"] = 2;
+	word_counts["time"] = 2;
+	stringstream output;
+	output_word_counts(word_counts, output);
+	EXPECT_EQ(output.str(), "same 2\ntime 2\n");
+}
 
