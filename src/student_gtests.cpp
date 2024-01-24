@@ -30,7 +30,7 @@ TEST(WordCount, CountWords) {
 	EXPECT_EQ(counts.at("case"), 1);
 	EXPECT_EQ(counts.at("aa"), 3);
 	EXPECT_EQ(counts.at("and"), 1);
-	EXPECT_EQ(counts.at("bb"), 0);
+	EXPECT_TRUE(counts.count("bb") == 0);
 
 }
 
