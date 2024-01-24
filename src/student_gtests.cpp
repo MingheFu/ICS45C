@@ -24,6 +24,7 @@ TEST(WordCount, LoadStopwords) {
 
 }
 
+
 TEST(WordCount, CountWords) {
 	stringstream test("test case aa aa and aa");
 	const auto counts = count_words(test, {});
@@ -31,8 +32,6 @@ TEST(WordCount, CountWords) {
 	EXPECT_EQ(counts.at("case"), 1);
 	EXPECT_EQ(counts.at("aa"), 3);
 	EXPECT_EQ(counts.at("and"), 1);
-	EXPECT_FALSE(counts.contains("bb"));
-
 }
 
 TEST(WordCount, OutputWordCount) {
@@ -43,5 +42,15 @@ TEST(WordCount, OutputWordCount) {
 	stringstream output;
 	output_word_counts(word_counts, output);
 	EXPECT_STREQ(output.str().c_str(), "aa 3\ncase 1\ntest 1\n");
+}
+
+TEST(WordCount, CountWords) {
+    stringstream test("test case aa aa and aa");
+    const auto counts = count_words(test, {});
+    EXPECT_EQ(counts.at("test"), 1);
+    EXPECT_EQ(counts.at("case"), 1);
+    EXPECT_EQ(counts.at("aa"), 3);
+    EXPECT_EQ(counts.at("and"), 1);
+    EXPECT_EQ(counts.at("bb"), 0);
 }
 
