@@ -20,6 +20,7 @@ TEST(WordCount, LoadStopwords) {
 	EXPECT_TRUE(stop_words.contains("without"));
 	EXPECT_TRUE(stop_words.contains("mistakes"));
 	EXPECT_FALSE(stop_words.contains("false"));
+	EXPECT_TRUE(stop_words.contains("unexpected_word"));
 
 }
 
@@ -30,7 +31,7 @@ TEST(WordCount, CountWords) {
 	EXPECT_EQ(counts.at("case"), 1);
 	EXPECT_EQ(counts.at("aa"), 3);
 	EXPECT_EQ(counts.at("and"), 1);
-	EXPECT_TRUE(counts.count("bb") == 0);
+	EXPECT_FALSE(counts.contains("bb"));
 
 }
 

@@ -41,7 +41,7 @@ void Coins::print(std::ostream& out) const {
 	out << quarters << " quarters, " << dimes << " dimes, " << nickels << " nickels, " << pennies << " pennies";
 }
 
-std::ostream& operator<<(std::ostream& out,const Coins& coins){
+std::ostream& operator<<(std::ostream& out,const Coins& coins) {
 	coins.print(out);
 	return out;
 }
