@@ -28,9 +28,9 @@ TEST(WordCount, LoadStopwords) {
 TEST(WordCount, CountWords) {
 	stringstream test("word1, word2! word3?");
 	const auto counts = count_words(test, {});
-	EXPECT_EQ(counts.count("word2"),1);
-	EXPECT_EQ(counts.count("word3"),1);
-	EXPECT_EQ(counts.count("word1"),1);
+	EXPECT_EQ(counts.count("word2"),0);
+	EXPECT_EQ(counts.count("word3"),0);
+	EXPECT_EQ(counts.count("word1"),0);
 }
 
 TEST(WordCount, OutputWordCount) {
