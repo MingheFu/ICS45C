@@ -89,7 +89,7 @@ void coins_menu(std::istream& in, std::ostream& out) {
 		switch (user_input) {
 			case 1: {
 				out << "\n";
-				Coins deposit_coins = ask_for_coins(cin, cout);
+				Coins deposit_coins = ask_for_coins(in, out);
 				myCoins.deposit_coins(deposit_coins);
 				out << "\n";
 				out << "Thank you!\n";
@@ -98,7 +98,7 @@ void coins_menu(std::istream& in, std::ostream& out) {
 			}
 			case 2: {
 				out << "\n";
-				Coins extract_coins = ask_for_coins(cin, cout);
+				Coins extract_coins = ask_for_coins(in, out);
 				Coins coins_extracted = myCoins.extract_exact_change(extract_coins);
 				out << "\n";
 				out << "Thank you!\n";
