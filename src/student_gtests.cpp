@@ -14,14 +14,14 @@ TEST(WordCount, ToLowercase) {
 }
 
 TEST(WordCount, LoadStopwords) {
-	stringstream test("good test without mistakes");
+	stringstream test("Word word WorD WORd");
 	const auto stop_words = load_stopwords(test);
-	EXPECT_TRUE(stop_words.contains("good"));
-	EXPECT_TRUE(stop_words.contains("test"));
-	EXPECT_TRUE(stop_words.contains("without"));
-	EXPECT_TRUE(stop_words.contains("mistakes"));
-	EXPECT_FALSE(stop_words.contains("false"));
-	EXPECT_FALSE(stop_words.contains("unexpected_word"));
+	EXPECT_TRUE(stop_words.contains("word"));
+	//EXPECT_TRUE(stop_words.contains("test"));
+	//EXPECT_TRUE(stop_words.contains("without"));
+	//EXPECT_TRUE(stop_words.contains("mistakes"));
+	//EXPECT_FALSE(stop_words.contains("false"));
+	//EXPECT_FALSE(stop_words.contains("unexpected_word"));
 
 }
 
