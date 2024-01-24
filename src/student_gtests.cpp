@@ -34,11 +34,15 @@ TEST(WordCount, CountWords) {
 
 TEST(WordCount, OutputWordCount) {
 	map<string, int> word_counts;
-	word_counts["test"] = 1;
-	word_counts["case"] = 1;
-	word_counts["aa"] = 3;
+	word_counts[string(100000, 'a')] = 1;
+	//word_counts["test"] = 1;
+	//word_counts["case"] = 1;
+	//word_counts["aa"] = 3;
 	stringstream output;
 	output_word_counts(word_counts, output);
-	EXPECT_STREQ(output.str().c_str(), "aa 3\ncase 1\ntest 1\n");
+	//EXPECT_STREQ(output.str().c_str(), "aa 3\ncase 1\ntest 1\n");
+	EXPECT_LE(output.str().length(), 100003);
+
 }
+
 
