@@ -150,12 +150,19 @@ char *String::strncpy(char *dest, const char *src, int n) {
 }
 
 char *String::strcat(char *dest, const char *src) {
-	int dest_len = 0;
-	while (dest[dest_len] != '\0') {
-		++dest_len;
+	int dest_len = strlen(dest);
+	int src_len = strlen(src);
+	if (dest_len + src_len >= MAXLEN) {
+		std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
+		return dest;
 	}
+
 	int i = 0;
 	while (src[i] != '\0') {
+		if (dest_len + i >= MAXLEN - 1) {
+			std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
+			return dest;
+		}
 		dest[dest_len + i] = src[i];
 		++i;
 	}
@@ -230,4 +237,4 @@ std::istream &operator>>(std::istream &in, String &s) {
 	s.read(in);
 	return in;
 }
-	
+
