@@ -89,4 +89,7 @@ TEST(StringFunction, strstr) {
     EXPECT_EQ(String::strstr("hello world", "world"), &("hello world"[6]));
 	EXPECT_EQ(String::strstr("hello world", "hello"), &("hello world"[0]));
 	EXPECT_EQ(String::strstr("hello world", "world"), &("hello world"[6]));
+	EXPECT_EQ(String::strstr("hello world", ""), &("hello world"[0]));
+	EXPECT_EQ(String::strstr("", ""), nullptr);
+	EXPECT_EQ(String::strstr("", "foo"), nullptr);
 }
