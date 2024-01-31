@@ -41,7 +41,7 @@ public:
 
 	~String();
 
-	bool in_bounds(int i) {
+	bool in_bounds(int i) const {
 		return i>= 0 && i < strlen(buf);
 	}
 

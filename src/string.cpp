@@ -98,11 +98,16 @@ String String::operator+(const String &s) const {
 }
 
 String &String::operator+=(const String &s) {
+	
 	size_t newSize = strlen(buf) + strlen(s.buf);
 	if (newSize >= MAXLEN) {
 		std::cout << "ERROR: String Capacity Exceeded" << std::endl;
 		return *this;
 	} 
+	if (this == &s) {
+		String temp(s);
+		return *this += temp;
+	}
 	strncat(buf, s.buf, MAXLEN - strlen(buf)-1);
 	return *this;
 }
