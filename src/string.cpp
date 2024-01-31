@@ -7,7 +7,7 @@ using namespace std;
 
 String::String(const char *s) {
 	if (strlen(s) >= MAXLEN) {
-		std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
+		std::cout << "ERROR: String Capacity Exceeded" << std::endl;
 		s = "";
 	}
 	strcpy(buf, s);
@@ -28,7 +28,7 @@ char &String::operator[](int index) {
 	if (in_bounds(index)) {
 		return buf[index];
 	} else {
-		 std::cerr << "ERROR: Index Out Of Bounds" << std::endl;
+		 std::cout << "ERROR: Index Out Of Bounds" << std::endl;
 		 return buf[0];
 	}
 }
@@ -88,7 +88,7 @@ bool String::operator>=(const String &s) const {
 
 String String::operator+(const String &s) const {
 	if (size() + s.size() >= MAXLEN) {
-		std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
+		std::cout << "ERROR: String Capacity Exceeded" << std::endl;
 		return String();
 	} 
 	String result;
@@ -98,8 +98,12 @@ String String::operator+(const String &s) const {
 }
 
 String &String::operator+=(const String &s) {
+	if (s.size() >= MAXLEN) {
+		std::cout << "ERROR: String Capacity Exceeded" << std::endl;
+		return *this;
+	}
 	if (size() + s.size() >= MAXLEN) {
-		std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
+		std::cout << "ERROR: String Capacity Exceeded" << std::endl;
 		return *this;
 	} 
 	strcat(buf, s.buf);
@@ -117,7 +121,7 @@ void String::print(std::ostream &out) const {
 void String::read(std::istream &in) {
 	in >> buf;
 	if (size() >= MAXLEN){
-		std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
+		std::cout << "ERROR: String Capacity Exceeded" << std::endl;
 		buf[0] = '\0';
 	} 
 }
@@ -151,20 +155,10 @@ char *String::strncpy(char *dest, const char *src, int n) {
 
 char *String::strcat(char *dest, const char *src) {
 	int dest_len = strlen(dest);
-	int src_len = strlen(src);
-	if (dest_len + src_len >= MAXLEN) {
-		std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
-		return dest;
-	}
-
 	int i = 0;
 	while (src[i] != '\0') {
-		if (dest_len + i >= MAXLEN - 1) {
-			std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
-			return dest;
-		}
-		dest[dest_len + i] = src[i];
-		++i;
+			dest[dest_len + i] = src[i];
+			++i;
 	}
 	dest[dest_len + i] = '\0';
 	return dest;
