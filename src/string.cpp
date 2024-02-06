@@ -70,7 +70,7 @@ int String::indexOf(char c) const {
 	}
 }
 
-int String::indexOf(String &s) const {
+int String::indexOf(const String &s) const {
 	const char* result = strstr(buf, s.buf);
 	if (result) {
 		return static_cast<int>(result - buf);
