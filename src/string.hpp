@@ -48,10 +48,10 @@ public:
     bool operator>=(String s) const;
 
     // concatenate this and s to form a return string
-    String operator+(String &s) const;
+    String operator+(const String &s) const;
 
     // concatenate s onto the end of this string
-    String &operator+=(String &s);
+    String &operator+=(const String &s);
 
     // print this string, hint: use operator << to send buf to out
     void print(std::ostream &out) const;
