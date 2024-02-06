@@ -40,12 +40,12 @@ public:
     int indexOf(const String &s) const;
 
     // relational operators for comparing this strings to another string
-    bool operator==(String s) const;
-    bool operator!=(String s) const;
-    bool operator>(String s) const;
-    bool operator<(String s) const;
-    bool operator<=(String s) const;
-    bool operator>=(String s) const;
+    bool operator==(const String &s) const;
+    bool operator!=(const String &s) const;
+    bool operator>(const String &s) const;
+    bool operator<(const String &s) const;
+    bool operator<=(const String &s) const;
+    bool operator>=(const String &s) const;
 
     // concatenate this and s to form a return string
     String operator+(const String &s) const;
