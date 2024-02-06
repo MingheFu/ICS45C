@@ -70,7 +70,7 @@ int String::indexOf(char c) const {
 	}
 }
 
-int String::indexOf(String s) const {
+int String::indexOf(String &s) const {
 	const char* result = strstr(buf, s.buf);
 	if (result) {
 		return static_cast<int>(result - buf);
@@ -103,7 +103,7 @@ bool String::operator>=(String s) const {
 	return strcmp(buf, s.buf) >= 0;
 }
 
-String String::operator+(String s) const {
+String String::operator+(String &s) const {
 	String result(size() + s.size());
 	strcpy(result.buf, buf);
 	strcat(result.buf, s.buf);
@@ -111,7 +111,7 @@ String String::operator+(String s) const {
 }
 
 
-String &String::operator+=(String s) {
+String &String::operator+=(String &s) {
 	int newSize = size() + s.size();
 	char* tempBuf = new char[newSize + 1];
 	strcpy(tempBuf, buf);
