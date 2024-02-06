@@ -25,6 +25,10 @@ void String::swap(String &s) {
 	std::swap(buf, s.buf);
 }
 
+String::String(String&& s) noexcept : buf(nullptr) {
+	swap(s);
+}
+
 
 String &String::operator=(String s) {
 	swap(s);
