@@ -132,11 +132,12 @@ void String::print(std::ostream &out) const {
 
 
 void String::read(std::istream &in) {
-	String temp;
-    if (in >> temp) { 
+	std::string temp;
+    if (in >> temp) {
         delete[] buf;
-        buf = new char[temp.size() + 1];
-        strcpy(buf, temp.buf);
+        buf = new char[temp.length() + 1]; 
+        std::copy(temp.begin(), temp.end(), buf); 
+        buf[temp.length()] = '\0';
     }
 }
 
