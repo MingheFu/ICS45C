@@ -132,10 +132,25 @@ void String::print(std::ostream &out) const {
 
 
 void String::read(std::istream &in) {
-	delete[] buf;
-	String temp;
-	in >> temp;
-	buf = strdup(temp.buf);
+	 const int BufferSize = 256;
+    int bufferSize = BufferSize;
+    char *tempBuffer = new char[bufferSize];
+    int length = 0;
+
+    char ch;
+    while (in.get(ch)) {
+        if (length == bufferSize - 1) {
+            bufferSize *= 2;
+            char *newBuffer = new char[bufferSize];
+            strncpy(newBuffer, tempBuffer, length);
+            delete[] tempBuffer;
+            tempBuffer = newBuffer;
+        }
+        tempBuffer[length++] = ch;
+    }
+    tempBuffer[length] = '\0';
+    delete[] buf;
+    buf = tempBuffer;
 }
 
 int String::strlen(const char *s) {
