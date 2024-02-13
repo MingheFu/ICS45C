@@ -68,7 +68,6 @@ int String::size() const {
 String String::reverse() const {
 	Node* reversed = list::reverse(head);
     String reversedString(reversed);
-    free(reversed);
     return reversedString;
 }
 
