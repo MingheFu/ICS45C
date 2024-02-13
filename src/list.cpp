@@ -60,11 +60,11 @@ int compare(Node* lhs, Node* rhs) {
 }
 
 int compare(Node* lhs, Node* rhs, int n) {
-	if (lhs == nullptr && rhs == nullptr) return 0;
-    if (lhs == nullptr) return -1;
-    if (rhs == nullptr) return 1;
     for (int i = 0; i < n; ++i) {
         if (lhs == nullptr || rhs == nullptr) {
+            if (lhs == nullptr && rhs == nullptr) {
+                return 0;
+            }
             return lhs == nullptr ? -1 : 1;
         }
         if (lhs->data < rhs->data) return -1;

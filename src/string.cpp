@@ -80,6 +80,9 @@ int String::indexOf(char c) const {
 }
 
 int String::indexOf(const String &s) const {
+	if (s.size() == 0) {
+		return 0;
+	}
 	Node* found = find_list(head, s.head);
     if (!found) return -1;
     int index = 0;
