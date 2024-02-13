@@ -113,8 +113,12 @@ String &String::operator+=(const String &s) {
 }
 
 void String::print(std::ostream &out) const {
-	for (Node* current = head; current != nullptr; current = current->next) {
-        out << current->data;
+	if (head == nullptr) {
+        out << "ERROR";
+    } else {
+        for (Node* current = head; current != nullptr; current = current->next) {
+            out << current->data;
+        }
     }
 }
 	
