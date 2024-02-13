@@ -87,13 +87,15 @@ int length(Node* head) {
 Node* reverse(Node* head) {
 	Node* reverse = nullptr;
 	Node* current = head;
+	Node* next = nullptr;
 	while (current != nullptr) {
-		Node* next = current->next;
+		next = current->next;
 		current->next = reverse;
 		reverse = current;
 		current = next;
 	}
-	return reverse;
+	head = reverse;
+	return head;
 }
 
 Node* append(Node* lhs, Node* rhs) {

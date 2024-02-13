@@ -100,10 +100,9 @@ std::strong_ordering String::operator<=>(const String &s) const {
 }
 
 String String::operator+(const String &s) const {
-	Node* concatenate = append(head, s.head);
-    String concatenatedString(concatenate);
-    free(concatenate);
-    return concatenatedString;
+	Node* concatenate = append(this->head, s.head);
+    String result(concatenate);
+    return result;
 }
 
 String &String::operator+=(const String &s) {
