@@ -57,6 +57,7 @@ char String::operator[](int index) const {
         	return current->data;
     	}
     }
+	std::cout << "ERROR: Index Out Of Bounds" << std::endl;
     return '\0';
 }
 
@@ -113,12 +114,8 @@ String &String::operator+=(const String &s) {
 }
 
 void String::print(std::ostream &out) const {
-	if (head == nullptr) {
-        out << "ERROR";
-    } else {
-        for (Node* current = head; current != nullptr; current = current->next) {
-            out << current->data;
-        }
+	for (Node* current = head; current != nullptr; current = current->next) {
+        out << current->data;
     }
 }
 	
