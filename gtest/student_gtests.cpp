@@ -51,17 +51,18 @@ TEST(ListTests, CopyList) {
 
 TEST(ListTests, Reverselist) {
 	Node* head = list::from_string("test");
-    Node* reversed_head = list::reverse(head);
+    head = list::reverse(head);
     const char expected_order[] = {'t', 's', 'e', 't'};
-    for (size_t i = 0; i < sizeof(expected_order); ++i) {
-        ASSERT_NE(reversed_head, nullptr);
-        EXPECT_EQ(reversed_head->data, expected_order[i]);
-        reversed_head = reversed_head->next;
+    const size_t expected_length = 4;
+    
+    Node* current = head;
+    for (size_t i = 0; i < expected_length; ++i) {
+        ASSERT_NE(current, nullptr);
+        EXPECT_EQ(current->data, expected_order[i]);
+        current = current->next;
     }
+    EXPECT_EQ(current, nullptr);
     list::free(head);
-	if (head != reversed_head) {
-		list::free(reversed_head);
-	}
 }
 
 TEST(ListTests, CompareLists) {
