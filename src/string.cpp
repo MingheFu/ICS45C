@@ -105,11 +105,21 @@ String String::operator+(const String &s) const {
 }
 
 String &String::operator+=(const String &s) {
-	Node* concatenate = append(head, s.head);
+	/*Node* concatenate = append(head, s.head);
     free(head);
     head = concatenate;
     return *this;
+	*/
+	if (!s.head) return *this;
+    if (!head) {
+        head = copy(s.head);
+    } else {
+        Node* result = last(head);
+        result->next = copy(s.head);
+    }
+	return *this;	
 }
+
 
 void String::print(std::ostream &out) const {
 	for (Node* current = head; current != nullptr; current = current->next) {
