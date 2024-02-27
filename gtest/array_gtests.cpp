@@ -49,6 +49,12 @@ TEST(ArrayTests, FillWithFunction) {
     EXPECT_EQ(arr[9], 81);
 }
 
+TEST(ArrayTests, Fill) {
+	Array<int> arr{5};
+    arr.fill(45);
+    EXPECT_EQ(arr[3], 45);
+}
+
 
 TEST(ArrayTests, Swap) {
     Array<int> arr{10};
