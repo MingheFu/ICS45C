@@ -21,7 +21,7 @@ public:
 	}
 
 		
-	Array(Array&& other) noexcept {
+	Array(Array&& other) noexcept: len(other.len), buf(other.buf) {
 		other.len = 0;
 		other.buf = nullptr;
 	}
@@ -31,8 +31,28 @@ public:
 		std::swap(lhs.buf, rhs.buf);
 	}
 
-	Array& operator=(const Array& other);
-	Array& operator=(Array&& other) noexcept;
+	Array& operator=(const Array& other) {
+		if (this != &other) {
+			int* new_buf = new int[other.len];
+			for (int i = 0; i < other.len; ++i) {
+				new_buf[i] = other.buf[i];
+			}
+			delete[] buf;
+			len = other.len;
+			buf = new_buf;
+		}
+		return *this;
+	}
+	Array& operator=(Array&& other) noexcept {
+		if (this != &other) {
+			delete[] buf;
+			len = other.len;
+			buf = other.buf;
+			other.len = 0;
+			other.buf = nullptr;
+		}
+		return *this;
+	}
 
 	~Array() {
 		delete[] buf;
