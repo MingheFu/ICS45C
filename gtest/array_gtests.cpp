@@ -94,3 +94,49 @@ TEST(ArrayTests, MoveAssignment) {
     EXPECT_EQ(arr2[0], 20);
     EXPECT_EQ(arr2[9], 20);
 }
+
+TEST(ArrayTests, Subscript) {
+    Array<int> arr{10};
+    arr[0] = 3;
+    arr[3] = 5;
+    EXPECT_EQ(arr[0], 3);
+    EXPECT_EQ(arr[3], 5);
+
+    Array<string> s_arr{2};
+    s_arr[0] = "this";
+    s_arr[1] = "test";
+    EXPECT_EQ(s_arr[0], "this");
+    EXPECT_EQ(s_arr[1], "test");
+}
+
+TEST(ArrayTests, Print) {
+    stringstream out;
+
+    Array<int> arr{3};
+    arr[0] = 0;
+    arr[1] = 1;
+    arr[2] = 2;
+
+    out << arr;
+
+    EXPECT_EQ(out.str(), "0 1 2 ");
+}
+
+TEST(ArrayTests, Read) {
+    stringstream in{"1 2 3"};
+
+    Array<int> arr{3};
+    in >> arr;
+
+    EXPECT_EQ(arr[0], 1);
+    EXPECT_EQ(arr[1], 2);
+    EXPECT_EQ(arr[2], 3);
+}
+
+
+TEST(IntArrayTests, OutOfBounds) {
+    Array<int> arr{10};
+    EXPECT_ANY_THROW(arr[11]);
+}
+
+

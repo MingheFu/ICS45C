@@ -28,7 +28,7 @@ public:
 	}
 
 	Array& operator=(Array&& other) noexcept {
-		if (this!= other) {
+		if (this!= &other) {
 			delete[] buf;
 			len = other.len;
 			buf = other.buf;
