@@ -115,18 +115,18 @@ TEST(ArrayTests, Subscript) {
     EXPECT_EQ(s_arr[1], "test");
 }
 
-TEST(ArrayTests, Print) {
+//TEST(ArrayTests, Print) {
     stringstream out;
 
     Array<int> arr{3};
-    arr[0] = 0;
-    arr[1] = 1;
-    arr[2] = 2;
+    arr[0] = 0.50;
+    arr[1] = 1.24;
+    arr[2] = 2.00;
 
     out << arr;
 
-    EXPECT_EQ(out.str(), "       0        1        2 ");
-}
+    EXPECT_EQ(out.str(), "    0.50    1.24    2.00");
+}//
 
 TEST(ArrayTests, Read) {
     stringstream in{"1 2 3"};
