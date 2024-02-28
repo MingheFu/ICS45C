@@ -52,13 +52,17 @@ private:
 
 template <typename Y>
 std::ostream& operator<<(std::ostream& out, const Matrix<Y>& matrix) {
-	for (int i = 0; i < matrix.num_rows(); ++i) {
+	/*for (int i = 0; i < matrix.num_rows(); ++i) {
         for (int j = 0; j < matrix.num_cols(); ++j) {
-            out << matrix[i][j];
+            out << matrix[i][j];*/
+    out << std::fixed << std::setprecision(2) << std::right;
+    for (int i = 0; i < matrix.num_rows(); ++i) {
+        for (int j = 0; j < matrix.num_cols(); ++j) {
+            out << std::setw(8) << matrix[i][j];
         }
         out << std::endl;
     }
-    return out;
+    return out; 
 }
 
 template <typename P>
