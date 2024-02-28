@@ -125,7 +125,7 @@ TEST(ArrayTests, Print) {
 
     out << arr;
 
-    EXPECT_EQ(out.str(), "0 1 2 ");
+    EXPECT_EQ(out.str(), "       0        1        2 ");
 }
 
 TEST(ArrayTests, Read) {
