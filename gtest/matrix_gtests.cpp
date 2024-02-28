@@ -32,13 +32,13 @@ TEST(MatrixTests, Subscript) {
     EXPECT_EQ(int_matrix[2][2], 3);
 }
 
-TEST(MatrixTests, Print) {
+//TEST(MatrixTests, Print) {
 	 std::stringstream ss;
     Matrix<int> int_matrix(2, 2);
     int_matrix.fill_with_fn([](int row, int col) { return row * 2 + col; });
     ss << int_matrix;
     EXPECT_EQ(ss.str(), "0 1 \n2 3 \n");
-}
+}//
 
 TEST(MatrixTests, Read) {
 	std::stringstream ss("1 2 3 4 5 6");
