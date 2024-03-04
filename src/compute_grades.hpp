@@ -27,7 +27,7 @@ private:
 
 	//these are computed
 	double quiz_avg;
-	double hw_avg
+	double hw_avg;
 	int course_score;
 	std::string course_grade;
 
