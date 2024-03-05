@@ -1,7 +1,7 @@
 #include <fstream>
-#include <compute_grades.hpp>
+#include "compute_grades.hpp"
 
-using namesapce std;
+using namespace std;
 
 int main() {
 	ifstream gradebook{"gradebook.txt."};
@@ -9,7 +9,7 @@ int main() {
 	gradebook >> b;
 
 	b.validate();
-	b.compute_grade();
+	b.compute_grades();
 	b.sort();
 
 	ofstream course_grades{"course_grades.txt"};

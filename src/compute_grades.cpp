@@ -76,12 +76,10 @@ void Gradebook::compute_grades() {
 }
 
 void Gradebook::sort() {
-    std::ranges::sort(students, [](const Student& a, const Student& b) {
-        return std::tie(a.last_name, a.first_name) < std::tie(b.last_name, b.first_name);
-    });
+    std::ranges::sort(students);
 }
 
-void Gradebook::validate() {
+void Gradebook::validate()const {
 	for (const Student& student : students) {
         student.validate();
     }
@@ -94,23 +92,23 @@ std::istream& operator>>(std::istream& in, Student& s) {
         iss >> keyword;
         if (keyword == "Name") {
             s.first_name = s.last_name = "";
-            s_first_name >> s.first_name;
-            std::getline(s_first_name, s.last_name);
+            iss >> s.first_name;
+            std::getline(iss, s.last_name);
             s.last_name = s.first_name + s.last_name;
         } else if (keyword == "Quiz") {
             s.quiz.clear();
             int score;
-            while (s_first_name  >> score) {
+            while (iss  >> score) {
                 s.quiz.push_back(score);
             }
         } else if (keyword == "HW") {
             s.hw.clear();
             int score;
-            while (s_first_name >> score) {
+            while (iss >> score) {
                 s.hw.push_back(score);
             }
         } else if (keyword == "Final") {
-            s_first_name >> s.final_score;
+            iss >> s.final_score;
         }
     }
     s.validate();
