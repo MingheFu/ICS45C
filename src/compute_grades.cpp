@@ -114,14 +114,8 @@ std::istream& operator>>(std::istream& in, Student& s) {
 
 std::istream& operator>>(std::istream& in, Gradebook& b) {
     Student student;
-    while (true) {
-        if (!(in >> student)) {
-            break;
-      	}
-        if (std::find(b.students.begin(), b.students.end(), student) == b.students.end()) {
-            b.students.push_back(student);
-        }
-        in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    while (in >> student) {
+        b.students.push_back(student);
     }
     return in;
 }
