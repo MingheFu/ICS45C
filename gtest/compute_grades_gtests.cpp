@@ -36,9 +36,26 @@ TEST(ComputeGradeTests, output_word_counts) {
 }
 */
 
-TEST(ComputeGradeTests,validate_score) {
-	Student A;
-	
-	EXPECT_EQ(St
-	
+TEST(ComputeGradesTests, Validate) {
+    Student valid_student;
+    valid_student.hw = {100, 90, 80};
+    valid_student.quiz = {90, 80, 70};
+    valid_student.final_score = 85;
+    EXPECT_NO_THROW(valid_student.validate());
+    Student invalid_student;
+    invalid_student.hw = {101};
+    EXPECT_THROW(invalid_student.validate(), std::domain_error);
+}
 
+TEST(ComputeGradeTests, ComparisonOperators) {
+    Student student1;
+    student1.last_name = "D";
+    student1.first_name = "J";
+
+    Student student2;
+    student2.last_name = "D";
+    student2.first_name = "J";
+
+    EXPECT_TRUE(student1 < student2);
+    EXPECT_FALSE(student1 == student2);
+}
