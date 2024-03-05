@@ -4,7 +4,7 @@
 #include <sstream>
 #include <numeric>
 #include <algorithm>
-#include <stdexcept>
+
 #include <iomanip>
 #include <iterator>
 #include <cmath>
