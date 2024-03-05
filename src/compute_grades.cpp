@@ -128,10 +128,11 @@ std::istream& operator>>(std::istream& in, Student& s) {
 std::istream& operator>>(std::istream& in, Gradebook& b) {
     Student student;
     while (in >> student) {
-		student.validate();
+		
         b.students.push_back(student);
 		student = Student();
     }
+	b.validate();
     return in;
 }
 
@@ -146,7 +147,8 @@ std::ostream& operator<<(std::ostream& out, const Student& s) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Gradebook& b){
-	
+	b.validate();
+
 	for (const Student& student : b.students) {
         out << student << '\n';
 	}
