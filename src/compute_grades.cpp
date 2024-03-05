@@ -21,8 +21,8 @@ void Student::validate() const {
 }
 
 void Student::compute_grade() {
-    compute_quiz_avg();
-	compute_hw_avg();
+    //compute_quiz_avg();
+	//compute_hw_avg();
 	compute_course_score();
 	if (course_score >= 97) course_grade = "A+";
 	else if (course_score >= 93) course_grade = "A";
@@ -50,10 +50,18 @@ void Student::compute_quiz_avg() {
 }
 
 void Student::compute_hw_avg() {
-	hw_avg = hw.empty() ? 0.0 : std::accumulate(hw.begin(), hw.end(), 0.0) / hw.size();
+	//hw_avg = hw.empty() ? 0.0 : std::accumulate(hw.begin(), hw.end(), 0.0) / hw.size();
+	if (!hw.empty()) {
+        double sum = std::accumulate(hw.begin(), hw.end(), 0.0);
+        hw_avg = sum / hw.size();
+    } else {
+        hw_avg = 0.0;
+    }
 }
 
 void Student::compute_course_score() {
+	compute_hw_avg();
+	compute_quiz_avg();
 	course_score = std::round((quiz_avg * 0.4) + (hw_avg * 0.3) + (final_score * 0.3));
 }
 
@@ -132,8 +140,8 @@ std::ostream& operator<<(std::ostream& out, const Student& s) {
 
 std::ostream& operator<<(std::ostream& out, const Gradebook& b){
 	for (const Student& student : b.students) {
-        out << student;
-    }
+        out << student << '\n';
+	}
     return out;
 }
 
