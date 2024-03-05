@@ -123,11 +123,11 @@ std::istream& operator>>(std::istream& in, Gradebook& b) {
 
 std::ostream& operator<<(std::ostream& out, const Student& s) {
     out << std::left << std::setw(8) << "Name:" << " " << s.first_name << " " << s.last_name << '\n'
-        << std::left << std::setw(8) << "HW Ave:" << ' ' << s.hw_avg << '\n' // Add space for alignment
-        << std::left << std::setw(8) << "QZ Ave:" << ' ' << s.quiz_avg << '\n' // Add space for alignment
-        << std::left << std::setw(8) << "Final:"  << ' ' << s.final_score << '\n' // Add space for alignment
-        << std::left << std::setw(8) << "Total:"  << ' ' << s.course_score << '\n' // Add space for alignment
-        << std::left << std::setw(8) << "Grade:"  << ' ' << s.course_grade << "\n\n";
+        << std::left << std::setw(8) << "HW Ave:" << ' ' << s.hw_avg << '\n'
+        << std::left << std::setw(8) << "QZ Ave:" << ' ' << s.quiz_avg << '\n'
+        << std::left << std::setw(8) << "Final:"  << ' ' << s.final_score << '\n'
+        << std::left << std::setw(8) << "Total:"  << ' ' << s.course_score << '\n'
+        << std::left << std::setw(8) << "Grade:"  << ' ' << s.course_grade << '\n';
     return out;
 }
 
