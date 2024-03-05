@@ -92,7 +92,12 @@ void Gradebook::validate()const {
 }
 
 std::istream& operator>>(std::istream& in, Student& s) {
-      std::string line, keyword;
+    s.first_name.clear();
+    s.last_name.clear();
+    s.hw.clear();
+    s.quiz.clear();
+    s.final_score = 0;  
+	  std::string line, keyword;
     while (std::getline(in, line) && !line.empty()) {
         std::istringstream iss(line);
         iss >> keyword;
@@ -124,6 +129,7 @@ std::istream& operator>>(std::istream& in, Gradebook& b) {
     Student student;
     while (in >> student) {
         b.students.push_back(student);
+		student = Student();
     }
     return in;
 }
@@ -139,6 +145,7 @@ std::ostream& operator<<(std::ostream& out, const Student& s) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Gradebook& b){
+	
 	for (const Student& student : b.students) {
         out << student << '\n';
 	}
