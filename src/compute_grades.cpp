@@ -131,11 +131,13 @@ std::ostream& operator<<(std::ostream& out, const Student& s) {
     return out;
 }
 
-std::ostream& operator<<(std::ostream& out, const Gradebook& b) {
-	b.sort();
-    for (const Student& student : b.students) {
+std::ostream& operator<<(std::ostream& out, const Gradebook& b){
+    Gradebook sorted_b = b;
+    sorted_b.sort();
+	for (const Student& student : sorted_b.students) {
         out << student;
     }
     return out;
 }
+
 
