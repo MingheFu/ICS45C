@@ -10,16 +10,14 @@
 #include <cmath>
 
 void Student::validate() const {
-	for (int score : hw) {
-		if (score < 0 || score > 100) 
-			throw std::domain_error("Error: invalid percentage " + std::to_string(score));
-	}
-	for (int score: quiz) {	
-		if (score < 0 || score > 100) 
-			throw std::domain_error("Error: invalid percentage" + std::to_string(score));
-	}
-	if (final_score < 0 || final_score > 100)
-		throw std::domain_error("Error: invalid percentage" + std::to_string(final_score));
+	    auto check_score = [](int score) {
+        if (score < 0 || score > 100) {
+            throw std::domain_error("Error: invalid percentage " + std::to_string(score));
+        }
+    };
+    std::for_each(hw.begin(), hw.end(), check_score);
+    std::for_each(quiz.begin(), quiz.end(), check_score);
+    check_score(final_score);
 }
 
 void Student::compute_grade() {
@@ -70,19 +68,19 @@ bool Student::operator==(const Student& other) const {
 }
 
 void Gradebook::compute_grades() {
-    for (Student& student : students) {
+        std::for_each(students.begin(), students.end(), [](Student& student) {
         student.compute_grade();
-    }
+    });
 }
 
 void Gradebook::sort() {
-    std::ranges::sort(students);
+    std::sort(students.begin(), students.end());
 }
 
 void Gradebook::validate()const {
-	for (const Student& student : students) {
+	    std::for_each(students.begin(), students.end(), [](const Student& student) {
         student.validate();
-    }
+    });
 }
 
 std::istream& operator>>(std::istream& in, Student& s) {
@@ -93,12 +91,11 @@ std::istream& operator>>(std::istream& in, Student& s) {
         if (keyword == "Name") {
             s.first_name = s.last_name = "";
             iss >> s.first_name;
-            std::getline(iss, s.last_name);
-            s.last_name = s.first_name + s.last_name;
+            std::getline(iss >> std::ws, s.last_name);
         } else if (keyword == "Quiz") {
             s.quiz.clear();
             int score;
-            while (iss  >> score) {
+            while (iss >> score) {
                 s.quiz.push_back(score);
             }
         } else if (keyword == "HW") {
@@ -125,10 +122,15 @@ std::istream& operator>>(std::istream& in, Gradebook& b) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Student& s) {
-    out << std::left << std::setw(8) << "Name:"   << s.first_name << " " << s.last_name << '\n'
-        << std::left << std::setw(8) << "HW Ave:" << s.hw_avg << '\n'
+        out << std::left << std::setw(8) << "Name:";
+    if (s.first_name != "Missing") {
+        out << " " << s.first_name;
+    }
+    out << " " << s.last_name << '\n'
+		<< std::left << std::setw(8) << "Name:"   << s.first_name << " " << s.last_name << '\n'
+        << std::left << std::setw(8) << "HW Ave" << s.hw_avg << '\n'
         << std::left << std::setw(8) << "QZ Ave:" << s.quiz_avg << '\n'
-        << std::left << std::setw(8) << "Final:"  << s.final_score << '\n'
+        << std::left << std::setw(8) << "Final"  << s.final_score << '\n'
         << std::left << std::setw(8) << "Total:"  << s.course_score << '\n'
         << std::left << std::setw(8) << "Grade:"  << s.course_grade << "\n\n";
     return out;
