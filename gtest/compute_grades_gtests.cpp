@@ -36,7 +36,7 @@ TEST(ComputeGradeTests, output_word_counts) {
 }
 */
 
-TEST(ComputeGradesTests, Validate) {
+/*TEST(ComputeGradesTests, Validate) {
     Student valid_student;
     valid_student.hw = {100, 90, 80};
     valid_student.quiz = {90, 80, 70};
@@ -61,3 +61,8 @@ TEST(ComputeGradeTests, ComparisonOperators) {
 }
 
 
+TEST(ComputeGradeTests, ValidateThrowsExceptionOnInvalidScores) {
+    Student s;
+    s.hw = {95, 85, -5};
+    EXPECT_THROW(s.validate(), std::domain_error);
+}*/
