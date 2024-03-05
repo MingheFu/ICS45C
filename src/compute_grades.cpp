@@ -128,6 +128,7 @@ std::istream& operator>>(std::istream& in, Student& s) {
 std::istream& operator>>(std::istream& in, Gradebook& b) {
     Student student;
     while (in >> student) {
+		student.validate();
         b.students.push_back(student);
 		student = Student();
     }
