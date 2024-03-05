@@ -66,3 +66,20 @@ TEST(ComputeGradeTests, ValidateThrowsExceptionOnInvalidScores) {
     s.hw = {95, 85, -5};
     EXPECT_THROW(s.validate(), std::domain_error);
 }*/
+TEST(GradebookTests, ValidateStudentScoresErrorMessage) {
+    std::stringstream ss;
+    // Simulate input file content with an invalid HW score
+    ss << "Name John Doe\nQuiz 90 85 92\nHW 88 105 100\nFinal 93\n\n";
+
+    Gradebook gb;
+
+    try {
+        // Assuming operator>> for Gradebook is overloaded to read and validate scores
+        ss >> gb;
+        FAIL() << "Expected std::domain_error due to invalid HW score";
+    } catch (std::domain_error const& err) {
+        EXPECT_EQ(std::string(err.what()), "Error: invalid percentage 105");
+    } catch (...) {
+        FAIL() << "Caught an unexpected exception type";
+    }
+}
