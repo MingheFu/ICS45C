@@ -114,8 +114,13 @@ std::istream& operator>>(std::istream& in, Student& s) {
 
 std::istream& operator>>(std::istream& in, Gradebook& b) {
     Student student;
-    while (in >> student) {
-        b.students.push_back(student);
+    while (true) {
+        if (!(in >> student)) {
+            break;
+      	}
+        if (std::find(b.students.begin(), b.students.end(), student) == b.students.end()) {
+            b.students.push_back(student);
+        }
         in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     return in;
@@ -132,9 +137,7 @@ std::ostream& operator<<(std::ostream& out, const Student& s) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Gradebook& b){
-    Gradebook sorted_b = b;
-    sorted_b.sort();
-	for (const Student& student : sorted_b.students) {
+	for (const Student& student : b.students) {
         out << student;
     }
     return out;
