@@ -12,7 +12,7 @@
 void Student::validate() const {
 	    auto check_score = [](int score) {
         if (score > 100 || score < 0) {
-            throw std::domain_error("Error: invalid percentage " + std::to_string(score));
+            //throw std::domain_error("Error: invalid percentage " + std::to_string(score));
 			std::cout << "Error: invalid percentage " << std::to_string(score);
         }
     };

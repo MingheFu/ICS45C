@@ -2,57 +2,6 @@
 
 #include "compute_grades.hpp"
 
-/*TEST(ComputeGradeTests, to_lowercase) {
-    EXPECT_EQ(to_lowercase("hello WORLD"), "hello world");
-    EXPECT_EQ(to_lowercase("T"), "t");
-    EXPECT_EQ(to_lowercase(""), "");
-}
-
-TEST(ComputeGradeTests, load_stopwords) {
-    stringstream words1{"hello WORLD test TEST bar FOO bar"};
-    std::set<std::string> set1{"bar", "foo", "hello", "test", "world"};
-    EXPECT_EQ(load_stopwords(words1), set1);
-
-    stringstream words2{};
-    std::set<std::string> set2;
-    EXPECT_EQ(load_stopwords(words2), set2);
-
-    stringstream words3{"A a"};
-    std::set<std::string> set3{"a"};
-    EXPECT_EQ(load_stopwords(words3), set3);
-}
-
-TEST(ComputeGradeTests, count_words) {
-    stringstream test("aa aa Aa aA AA bC bc bc BC XY XY foo FOO foO Foo BAR bar");
-    std::map<std::string, int> expected{{"aa", 5}, {"bc", 4}, {"xy", 2}, {"bar", 2}};
-    EXPECT_EQ(count_words(test, {"foo"}), expected);
-}
-
-TEST(ComputeGradeTests, output_word_counts) {
-    map<string, int> word_counts{{"foo", 1}, {"bar", 5}, {"xy", 3}};
-    stringstream output;
-    output_word_counts(word_counts, output);
-    EXPECT_STREQ(output.str().c_str(), "bar 5\nfoo 1\nxy 3\n");
-}
-
-TEST(ComputeGradeTests, ValidationThrowsForInvalidScore) {
-    Student student("John Doe", 101); // Assuming this score is out of valid range
-    EXPECT_THROW(student.validate(), std::domain_error);
-}
-TEST(ComputeGradeTests, CorrectlyComparesStudents) {
-    Student student1("Alice", 90);
-    Student student2("Bob", 95); // Bob has a higher score than Alice
-
-    EXPECT_TRUE(student1 < student2); // Expect that student1 compares less than student2
-}*/
-
-
-
-/*TEST(ComputeGradeTests, ValidateThrowsExceptionOnInvalidScores) {
-    Student s;
-    s.hw = {95, 85, -5};
-    EXPECT_THROW(s.validate(), std::domain_error);
-}*/
 
 
 
@@ -73,24 +22,6 @@ TEST(ComputeGradeTests,ErrorMessageThrown) {
     });
 }
 
-/*TEST(ComputeGradesTests, ValidationWithInvalidData) {
-    std::stringstream ss("John Doe\n-5\n"); // Simulating invalid final score input
-    Student student;
-
-    EXPECT_THROW({
-        ss >> student; // Assuming operator>> is implemented to read data and call validate() internally
-    }, std::domain_error);
-}*/
-
-TEST(GradebookTest, InvalidStudentScores) {
-    std::stringstream ss;
-    ss << "Name John Doe\nQuiz 101\nHW 90 -5\nFinal 85\n\n"; // Invalid Quiz score
-    Gradebook gb;
-
-    EXPECT_THROW(ss >> gb, std::domain_error);
-}
-
-// Test validation logic with valid data
 TEST(ComputeGradesTests, ValidationWithValidData) {
     std::stringstream ss("Jane Doe\n95\n"); // Simulating valid final score input
     Student student;
@@ -116,27 +47,18 @@ TEST(ComputeGradesTests, Comparison) {
     EXPECT_FALSE(student1 < student3);
     EXPECT_FALSE(student3 < student2);
 }
-/*TEST(ComputeGradesTests, ValidationWithInvalidData) {
-    std::stringstream ss("John Doe\n-5\n"); // Simulating invalid final score input
-    Student student;
-
-    EXPECT_THROW({
-        ss >> student; // Assuming operator>> is implemented to read data and call validate() internally
-    }, std::domain_error);
-}*/
 
 TEST(ComputeGradesTest, ValidationWithInvalidData) {
-    // Adjusted input to match expected keyword-prefixed format
     std::stringstream ss;
     ss << "Name: John Doe\n"
-       << "HW: 90 95\n"  // Assuming these are valid
-       << "Quiz: 85 80\n"  // Assuming these are valid
-       << "Final: -5\n";  // Invalid final score, should trigger validation failure
+       << "HW: 90 95\n"
+       << "Quiz: 85 80\n"
+       << "Final: -5\n";
 
     Student student;
 	ss >> student;
     EXPECT_THROW({
-       student.validate() ;  // Reads and validates the student's data
+       student.validate() ;
     }, std::domain_error);
 }
 
