@@ -24,7 +24,7 @@ void Student::validate() const {
 	    auto check_score = [](int score) {
         if (score > 100 || score < 0) {
             //throw InvalidScore(score);
-			std::out << "Error: invalid percentage " << std::to_string(score);
+			std::cout << "Error: invalid percentage " << std::to_string(score);
         }
     };
     std::for_each(hw.begin(), hw.end(), check_score);
