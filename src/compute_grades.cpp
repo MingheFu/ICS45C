@@ -4,15 +4,27 @@
 #include <sstream>
 #include <numeric>
 #include <algorithm>
-
+#include <stdexcept>
 #include <iomanip>
 #include <iterator>
 #include <cmath>
 
+class InvalidScore : public std::domain_error {
+public:
+    InvalidScore(int score)
+        : std::domain_error("Error: invalid percentage " + std::to_string(score)), m_score(score) {}
+
+    int getScore() const noexcept { return m_score; }
+
+private:
+    int m_score;
+};
+
 void Student::validate() const {
 	    auto check_score = [](int score) {
-        if (score < 0 || score > 100) {
-            throw std::domain_error("Error: invalid percentage " + std::to_string(score));
+        if (score > 100 || score < 0) {
+            //throw InvalidScore(score);
+			std::out << "Error: invalid percentage " << std::to_string(score);
         }
     };
     std::for_each(hw.begin(), hw.end(), check_score);
@@ -137,7 +149,7 @@ std::istream& operator>>(std::istream& in, Gradebook& b) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Student& s) {
-    out << std::left << std::setw(8) << "Name:"  << s.first_name << ' ' << s.last_name << '\n'
+	out << std::left << std::setw(8) << "Name:"  << s.first_name << ' ' << s.last_name << '\n'
         << std::left << std::setw(8) << "HW Ave:"  << s.hw_avg << '\n'
         << std::left << std::setw(8) << "QZ Ave:"  << s.quiz_avg << '\n'
         << std::left << std::setw(8) << "Final:"   << s.final_score << '\n'

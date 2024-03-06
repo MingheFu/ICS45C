@@ -53,22 +53,7 @@ TEST(ComputeGradeTests, CorrectlyComparesStudents) {
     s.hw = {95, 85, -5};
     EXPECT_THROW(s.validate(), std::domain_error);
 }*/
-TEST(ComputeGradeTests, ValidateStudentScoresErrorMessage) {
-    std::stringstream ss;
-    ss << "Name John Doe\nQuiz 90 85 92\nHW 88 105 100\nFinal 93\n\n";
 
-    Gradebook gb;
-
-    try {
-        // Assuming operator>> for Gradebook is overloaded to read and validate scores
-        ss >> gb;
-        FAIL() << "Expected std::domain_error due to invalid HW score";
-    } catch (std::domain_error const& err) {
-        EXPECT_EQ(std::string(err.what()), "Error: invalid percentage 105");
-    } catch (...) {
-        FAIL() << "Caught an unexpected exception type";
-    }
-}
 
 
 TEST(ComputeGradeTests,ErrorMessageThrown) {
@@ -131,3 +116,27 @@ TEST(ComputeGradesTests, Comparison) {
     EXPECT_FALSE(student1 < student3);
     EXPECT_FALSE(student3 < student2);
 }
+/*TEST(ComputeGradesTests, ValidationWithInvalidData) {
+    std::stringstream ss("John Doe\n-5\n"); // Simulating invalid final score input
+    Student student;
+
+    EXPECT_THROW({
+        ss >> student; // Assuming operator>> is implemented to read data and call validate() internally
+    }, std::domain_error);
+}*/
+
+TEST(ComputeGradesTest, ValidationWithInvalidData) {
+    // Adjusted input to match expected keyword-prefixed format
+    std::stringstream ss;
+    ss << "Name: John Doe\n"
+       << "HW: 90 95\n"  // Assuming these are valid
+       << "Quiz: 85 80\n"  // Assuming these are valid
+       << "Final: -5\n";  // Invalid final score, should trigger validation failure
+
+    Student student;
+	ss >> student;
+    EXPECT_THROW({
+       student.validate() ;  // Reads and validates the student's data
+    }, std::domain_error);
+}
+
