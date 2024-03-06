@@ -83,3 +83,21 @@ TEST(GradebookTests, ValidateStudentScoresErrorMessage) {
         FAIL() << "Caught an unexpected exception type";
     }
 }
+
+
+TEST(GradebookTests,ErrorMessageThrown) {
+    std::stringstream ss;
+    ss << "Name John Doe\nQuiz 90 85 92\nHW 88 105 100\nFinal 93\n\n";
+
+    Gradebook gb;
+    EXPECT_ANY_THROW({
+        try {
+            ss >> gb;
+            gb.validate(); // Ensure to call validate if it's not automatically done during >> operation
+        } catch (const std::domain_error& err) {
+            // Check the specific error message
+            EXPECT_EQ(std::string(err.what()), "Error: invalid percentage 105");
+            throw; // Rethrow the exception to satisfy EXPECT_ANY_THROW
+        }
+    });
+}
