@@ -9,21 +9,10 @@
 #include <iterator>
 #include <cmath>
 
-class InvalidScore : public std::domain_error {
-public:
-    InvalidScore(int score)
-        : std::domain_error("Error: invalid percentage " + std::to_string(score)), m_score(score) {}
-
-    int getScore() const noexcept { return m_score; }
-
-private:
-    int m_score;
-};
-
 void Student::validate() const {
 	    auto check_score = [](int score) {
         if (score > 100 || score < 0) {
-            //throw InvalidScore(score);
+            throw std::domain_error("Error: invalid percentage " + std::to_string(score));
 			std::cout << "Error: invalid percentage " << std::to_string(score);
         }
     };
