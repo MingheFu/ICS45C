@@ -12,14 +12,30 @@
 void Student::validate() const {
 	    auto check_score = [](int score) {
         if (score > 100 || score < 0) {
-            //throw std::domain_error("Error: invalid percentage " + std::to_string(score));
-			std::cout << "Error: invalid percentage " << std::to_string(score);
+            throw std::domain_error("Error: invalid percentage " + std::to_string(score));
+			//std::cout << "Error: invalid percentage " << std::to_string(score);
         }
     };
     std::for_each(hw.begin(), hw.end(), check_score);
     std::for_each(quiz.begin(), quiz.end(), check_score);
     check_score(final_score);
 }
+/*void Student::validate() const {
+	auto quiz_check = std::find_if(quiz.begin(), quiz.end(), [](int score) { return score < 0||  score > 100; });
+	if (quiz_check != quiz.end()) {
+		int invalid_data = *quiz_check;
+		throw std::domain_error("Error: invalid percentage " + std::to_string(invalid_data));
+	auto hw_check = std::find_if(quiz.begin(), quiz.end(), [](int score) { return score < 0 || score > 100; });
+    if (hw_check != hw.end()) {
+        int invalid_score = *hw_check;
+        throw std::domain_error("Error: invalid percentage " + std::to_string(invalid_score));
+   }
+
+    // Check final score
+    if (final_score < 0 || final_score > 100) {
+        throw std::domain_error("Error: invalid percentage " + std::to_string(final_score));
+    }
+}*/
 
 void Student::compute_grade() {
     //compute_quiz_avg();
@@ -122,7 +138,7 @@ std::istream& operator>>(std::istream& in, Student& s) {
             iss >> s.final_score;
         }
     }
-    s.validate();
+    //s.validate();
     return in; 
 }
 
