@@ -69,7 +69,7 @@ public:
             return true;
         }
     }
-    return false;
+    	return false;
 	}
 	ListIterator insert(T value) {
 		for (auto current = head; current != nullptr; current = current->next) {
@@ -77,10 +77,15 @@ public:
             return ListIterator(current);
         }
     }
-    auto newNode = std::make_shared<ListNode>(value, head);
+    	//auto newNode = std::make_shared<ListNode>(value, head);
+    	//head = newNode;
+    	//return ListIterator(newNode);
+		std::shared_ptr<ListNode> newNode = std::make_shared<ListNode>();
+    newNode->data = value;
+    newNode->next = head;
     head = newNode;
-    return ListIterator(newNode);
-}
+	return ListIterator(newNode);
+	}
 private:
 	std::shared_ptr<ListNode> head = nullptr;
 };
