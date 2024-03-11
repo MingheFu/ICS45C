@@ -13,6 +13,7 @@ class SetList {
 	struct ListNode {
 		T data;
 		std::shared_ptr<ListNode> next;
+		ListNode(T data) : data(std::move(data)), next(nullptr) {}
 	};
 
 public:
