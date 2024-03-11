@@ -43,9 +43,9 @@ public:
 				return &(ptr->data);
 			}
 			bool operator==(const ListIterator& other) const = default;
-			//bool operator!=(const ListIterator& other) const {
-            //	return ptr != other.ptr;
-        	//}
+			bool operator!=(const ListIterator& other) const {
+            	return ptr != other.ptr;
+        	}
 
 		private:
 			std::shared_ptr<ListNode> ptr;

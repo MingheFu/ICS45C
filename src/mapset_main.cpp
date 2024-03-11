@@ -16,13 +16,14 @@ string to_lowercase(const string& str) {
 SetList<string> load_stopwords(istream& stopwords) {
 	return SetList<string>{ranges::istream_view<string>(stopwords)
 							| views::transform(to_lowercase)};
+	}
 MapArray<string, int> count_words(istream& document, SetList<string>& stopwords){
 	auto words_view = ranges::istream_view<string>(document)
-							|view::transform(to_lowercase)
+							|views::transform(to_lowercase)
 							| views::filter([&](const string& s) {
 									return !stopwords.contains(s);});
 	MapArray<string, int> result;
-	for (const string& s: word_view) {
+	for (const string& s: words_view) {
 		++result[s];
 	}
 
