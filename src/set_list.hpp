@@ -20,7 +20,7 @@ public:
 		public:
 			using iterator_category = std::forward_iterator_tag;
 		    using value_type = T;
-			using differece_type = std::ptrdiff_t;
+			using difference_type = std::ptrdiff_t;
 			using pointer = T*;
 			using reference = T&;
 
@@ -43,6 +43,10 @@ public:
 				return &(ptr->data);
 			}
 			bool operator==(const ListIterator& other) const = default;
+			//bool operator!=(const ListIterator& other) const {
+            //	return ptr != other.ptr;
+        	//}
+
 		private:
 			std::shared_ptr<ListNode> ptr;
 	};
@@ -81,10 +85,10 @@ public:
     	//head = newNode;
     	//return ListIterator(newNode);
 		std::shared_ptr<ListNode> newNode = std::make_shared<ListNode>();
-    newNode->data = value;
-    newNode->next = head;
-    head = newNode;
-	return ListIterator(newNode);
+    	newNode->data = value;
+    	newNode->next = head;
+    	head = newNode;
+		return ListIterator(newNode);
 	}
 private:
 	std::shared_ptr<ListNode> head = nullptr;
