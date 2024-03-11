@@ -13,8 +13,6 @@ class SetList {
 	struct ListNode {
 		T data;
 		std::shared_ptr<ListNode> next;
-		ListNode(const T& data) : data(data), next(nullptr) {}
-        ListNode() = default;
 	};
 
 public:
@@ -83,11 +81,8 @@ public:
             return ListIterator(current);
         }
     }
-    	//auto newNode = std::make_shared<ListNode>(value, head);
-    	//head = newNode;
-    	//return ListIterator(newNode);
 		//std::shared_ptr<ListNode> newNode = std::make_shared<ListNode>();
-		auto newNode = std::make_shared<ListNode>(value);
+		auto newNode = std::make_shared<ListNode>(std::move(value));
     	newNode->data = value;
     	newNode->next = head;
     	head = newNode;
