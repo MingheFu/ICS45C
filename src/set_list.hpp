@@ -84,7 +84,7 @@ public:
     }
 		//std::shared_ptr<ListNode> newNode = std::make_shared<ListNode>();
 		auto newNode = std::make_shared<ListNode>(std::move(value));
-    	newNode->data = value;
+    	
     	newNode->next = head;
     	head = newNode;
 		return ListIterator(newNode);
