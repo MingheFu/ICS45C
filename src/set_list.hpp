@@ -13,6 +13,8 @@ class SetList {
 	struct ListNode {
 		T data;
 		std::shared_ptr<ListNode> next;
+		ListNode(const T& data) : data(data), next(nullptr) {}
+        ListNode() = default;
 	};
 
 public:
@@ -43,9 +45,9 @@ public:
 				return &(ptr->data);
 			}
 			bool operator==(const ListIterator& other) const = default;
-			bool operator!=(const ListIterator& other) const {
-            	return ptr != other.ptr;
-        	}
+			//bool operator!=(const ListIterator& other) const {
+            //	return ptr != other.ptr;
+        	//}
 
 		private:
 			std::shared_ptr<ListNode> ptr;
